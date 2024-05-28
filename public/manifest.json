@@ -1,9 +1,9 @@
 {
     "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-    "name": "qwik-project-name",
-    "short_name": "Welcome to Qwik",
+    "name": "AT logo",
+    "short_name": "Logo",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#fff",
-    "description": "A Qwik project app."
+    "description": ""
 }
