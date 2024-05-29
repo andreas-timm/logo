@@ -2,6 +2,7 @@ import { $, component$, render } from '@builder.io/qwik'
 import type { DocumentHead } from '@builder.io/qwik-city'
 import { Logo } from '~/components/logo'
 import { Button } from '~/components/ui/button/button'
+import format from 'xml-formatter'
 
 export default component$(() => {
     const logo = <Logo />
@@ -9,9 +10,9 @@ export default component$(() => {
     const handleClick = $(async () => {
         const container = document.createElement('div')
         await render(container, logo)
-        const svg = container.innerHTML
-            .replace(/\s+data-qwik-inspector="\S+?"/g, '')
-            .replace(/<!--\/?qv\s*-->/g, '')
+        let svg = container.innerHTML
+        svg = svg.replace(/\s+data-qwik-inspector="\S+?"/g, '').replace(/<!--\/?qv\s*-->/g, '')
+        svg = format(svg, { forceSelfClosingEmptyTag: true })
         const blob = new Blob([svg], { type: 'image/svg+xml' })
         const url = window.URL.createObjectURL(blob)
         const link = document.createElement('a')
@@ -19,8 +20,6 @@ export default component$(() => {
         link.download = 'at-logo.svg'
         link.click()
         window.URL.revokeObjectURL(url)
-
-        console.log('clicked')
     })
 
     return (
