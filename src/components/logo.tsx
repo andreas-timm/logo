@@ -47,8 +47,8 @@ export const Logo = component$(() => {
     const fraction = 0.68
 
     const arc = calcSec({ x: center, y: center, radius: center, angle, fraction })
-    const arcMain = `M ${arc.x} ${arc.y} A ${arc.rx} ${arc.ry} 0 1 0 ${arc.ex} ${arc.ey}`
-    const arcSec = `M ${arc.x} ${arc.y} A ${arc.rx} ${arc.ry} 0 0 1 ${arc.ex} ${arc.ey}`
+    const arcMain = `M${arc.x},${arc.y} A${arc.rx},${arc.ry},0,1,0,${arc.ex},${arc.ey}`
+    const arcSec = `M${arc.x},${arc.y} A${arc.rx},${arc.ry},0,0,1,${arc.ex},${arc.ey}`
 
     return (
         <svg viewBox='0 0 1000 1000' width='1000' height='1000' xmlns='http://www.w3.org/2000/svg'>
