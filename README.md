@@ -1,7 +1,7 @@
 # AT logo
-
 <img src="./public/assets/at-logo.svg" width="100" alt="logo" />
 
+Logo image svg module: [src/components/logo.tsx](src/components/logo.tsx)
 
 [![CC BY 4.0][cc-by-shield]][cc-by]
 
