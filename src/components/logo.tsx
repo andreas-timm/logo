@@ -12,9 +12,9 @@ import { component$ } from '@builder.io/qwik'
 type SecData = {
     x: number
     y: number
-    r: number
-    a: number
-    p: number
+    radius: number
+    angle: number
+    fraction: number
 }
 
 type ArcData = {
@@ -27,21 +27,26 @@ type ArcData = {
 }
 
 function calcSec(w: SecData): ArcData {
-    const a = (Math.PI * w.a) / 180
-    const p = w.r * w.p
-    const t = Math.sqrt(w.r ** 2 - p ** 2)
-    const dx = p * Math.sin(a) + t * Math.cos(a)
-    const dy = p * Math.cos(a) - t * Math.sin(a)
+    const angle = (Math.PI * w.angle) / 180
+    const fraction = w.radius * w.fraction
+    const vec = Math.sqrt(w.radius ** 2 - fraction ** 2)
+    const dx = fraction * Math.sin(angle) + vec * Math.cos(angle)
+    const dy = fraction * Math.cos(angle) - vec * Math.sin(angle)
     const x1 = w.x - dx
     const y1 = w.y - dy
-    const x2 = x1 + 2 * t * Math.cos(a)
-    const y2 = y1 - 2 * t * Math.sin(a)
+    const x2 = x1 + 2 * vec * Math.cos(angle)
+    const y2 = y1 - 2 * vec * Math.sin(angle)
 
-    return { x: x1, y: y1, rx: w.r, ry: w.r, ex: x2, ey: y2 }
+    return { x: x1, y: y1, rx: w.radius, ry: w.radius, ex: x2, ey: y2 }
 }
 
 export const Logo = component$(() => {
-    const arc = calcSec({ x: 500, y: 500, r: 500, a: 26, p: 0.68 })
+    const size = 1000
+    const center = size / 2
+    const angle = 26
+    const fraction = 0.68
+
+    const arc = calcSec({ x: center, y: center, radius: center, angle, fraction })
     const arcMain = `M ${arc.x} ${arc.y} A ${arc.rx} ${arc.ry} 0 1 0 ${arc.ex} ${arc.ey}`
     const arcSec = `M ${arc.x} ${arc.y} A ${arc.rx} ${arc.ry} 0 0 1 ${arc.ex} ${arc.ey}`
 
